@@ -1,12 +1,14 @@
 function renderBooks(filter) {
   const booksWrapper = document.querySelector(".books");
   const books = getBooks();
-if (filter === 'LOW_TO_HIGH') {
-  console.log(filter)
-  const filteredBooks = books.sort((a, b) => a.originalPrice - b.originalPrice);
-  console.log(filterBooks);
-}
 
+  if (filter === 'LOW_TO_HIGH') {
+    books.sort((a, b) => (a.salePrice || a.originalPrice) - (b.salePrice || b.originalPrice));
+  } else if (filter === 'HIGH_TO_LOW') {
+    books.sort((a, b) => (b.salePrice || b.originalPrice) - (a.salePrice || a.originalPrice));
+  } else if (filter === 'RATING') {
+    books.sort((a, b) => b.rating - a.rating);
+  }
 
   const booksHTML = books.map((book) => {
     return `<div class="book">
@@ -37,8 +39,6 @@ if (filter === 'LOW_TO_HIGH') {
 }
 
 function filterBooks(event) {
-  if (event.target.value === 'LOW_TO_HIGH') {
-  console.log(event);
   renderBooks(event.target.value);
 }
 
@@ -52,7 +52,7 @@ function getBooks() {
     {
       id: 1,
       title: "Crack the Coding Interview",
-                url: "assets/crack the coding interview.png",
+      url: "assets/crack the coding interview.png",
       originalPrice: 49.95,
       salePrice: 14.95,
       rating: 4.5,
