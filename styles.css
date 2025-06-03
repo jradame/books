@@ -427,7 +427,7 @@ BOOKS PAGE
   flex: 1;
 }
 
-.books__header {
+.books_header {
   display: flex;
   justify-content: space-between;
   align-items: center;
